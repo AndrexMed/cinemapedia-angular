@@ -8,12 +8,16 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/cinemapedia-angular",
         "index": "apps/cinemapedia-angular/src/index.html",
         "browser": "apps/cinemapedia-angular/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/cinemapedia-angular/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +26,9 @@
             "input": "apps/cinemapedia-angular/public"
           }
         ],
-        "styles": ["apps/cinemapedia-angular/src/styles.scss"],
+        "styles": [
+          "apps/cinemapedia-angular/src/styles.scss"
+        ],
         "scripts": [],
         "server": "apps/cinemapedia-angular/src/main.server.ts",
         "ssr": {
@@ -49,7 +55,13 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/cinemapedia-angular/src/environments/environment.ts",
+              "with": "apps/cinemapedia-angular/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -77,7 +89,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/cinemapedia-angular/jest.config.ts"
       }
