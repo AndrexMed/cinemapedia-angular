@@ -1,0 +1,40 @@
+<nav class="fixed top-0 z-50 w-full bg-gradient-to-b from-black to-transparent">
+  <div class="px-4 py-4 md:px-10">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+          alt="Logo de CinemaPedia"
+          class="h-8"
+        />
+        <div class="hidden ml-8 space-x-4 md:flex">
+          <a
+            class="text-white transition-colors hover:text-netflix-gray"
+            [routerLink]="['/']"
+            routerLinkActive="!text-netflix-red"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+          <a
+            class="text-white transition-colors hover:text-netflix-gray"
+            [routerLink]="['/movies']"
+            routerLinkActive="!text-netflix-red"
+            >Movies</a
+          >
+          <a
+            class="text-white transition-colors hover:text-netflix-gray"
+            [routerLink]="['/my-list']"
+            routerLinkActive="!text-netflix-red"
+            >My List</a
+          >
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <!-- TODO SEARCH COMPONENT -->
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -78,6 +78,15 @@ export class MoviesService {
       .subscribe();
   }
 
+  searchMovies(searchTerm: string): Observable<MovieResponse> {
+    return this._http.get<MovieResponse>(`${this.apiUrl}/search/movie`, {
+      params: {
+        ...this.queryParams,
+        query: searchTerm,
+      },
+    });
+  }
+
   setRandomMovie(): void {
     const randomIndex = this._getRandonInt(0, this.trendingMovies().length - 1);
     this.selectedMovie.set(this.trendingMovies()[randomIndex]);
