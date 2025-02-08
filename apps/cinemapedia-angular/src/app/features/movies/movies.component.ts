@@ -23,15 +23,19 @@ export class MoviesComponent {
   hasMorePages = computed(() => this._moviesSvc.hasMorePages());
 
   readonly movies = this._moviesSvc.movies;
+
+  trendingMovies = computed(() => this._moviesSvc.trendingMovies());
+
   @HostListener('window:scroll')
   onScroll(): void {
-    //TODO loading more movies
-    if (this.isLoading() || !this.hasMorePages()) return;
+    if (this.isLoading() || !this.hasMorePages()) {
+      return;
+    }
 
     const scrollPosition = window.innerHeight + window.scrollY;
-    const scrollThrehold = document.documentElement.scrollHeight;
+    const scrollThreshold = document.documentElement.scrollHeight;
 
-    if (scrollPosition > scrollThrehold) {
+    if (scrollPosition >= scrollThreshold) {
       this._moviesSvc._getMovies();
     }
   }

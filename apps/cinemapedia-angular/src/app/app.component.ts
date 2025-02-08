@@ -8,5 +8,18 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'cinemapedia-angular';
+  showButton = false;
+
+  // constructor() {
+  //   window.addEventListener('scroll', () => {
+  //     this.showButton = window.scrollY > 100;
+  //   });
+  // }
+
+  goToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 }
