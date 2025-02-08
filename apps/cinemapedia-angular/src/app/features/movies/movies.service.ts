@@ -18,25 +18,38 @@ export class MoviesService {
 
   private readonly apiKey = environment.apiKey;
   private readonly apiUrl = environment.apiUrl;
+  private readonly language = 'es-MX';
+
+  private readonly queryParams = {
+    api_key: this.apiKey,
+    language: this.language,
+  };
+
   private readonly _searchTerm = signal<string>('');
 
   private readonly _http = inject(HttpClient);
 
   constructor() {
     this._getMovies();
+    this._getTrending();
   }
 
   getMovieById(id: string): Observable<MovieResponse> {
-    return this._http.get<MovieResponse>(
-      `${this.apiUrl}/movie/${id}?api_key=${this.apiKey}`
-    );
+    return this._http.get<MovieResponse>(`${this.apiUrl}/movie/${id}`, {
+      params: {
+        ...this.queryParams,
+      },
+    });
   }
 
   _getMovies(): void {
     this._http
-      .get<MovieResponse>(
-        `${this.apiUrl}/movie/now_playing?api_key=${this.apiKey}`
-      )
+      .get<MovieResponse>(`${this.apiUrl}/movie/now_playing`, {
+        params: {
+          ...this.queryParams,
+          page: this.currentPage(),
+        },
+      })
       .pipe(
         tap((movies) => {
           const currentMovies = this.movies();
@@ -47,5 +60,30 @@ export class MoviesService {
         })
       )
       .subscribe();
+  }
+
+  _getTrending(): void {
+    this._http
+      .get<MovieResponse>(`${this.apiUrl}/trending/movie/week`, {
+        params: {
+          ...this.queryParams,
+        },
+      })
+      .pipe(
+        tap((movies: MovieResponse) => {
+          this.trendingMovies.set(movies.results);
+        }),
+        tap(() => this.setRandomMovie())
+      )
+      .subscribe();
+  }
+
+  setRandomMovie(): void {
+    const randomIndex = this._getRandonInt(0, this.trendingMovies().length - 1);
+    this.selectedMovie.set(this.trendingMovies()[randomIndex]);
+  }
+
+  private _getRandonInt(min = 0, max = 50): number {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 }
