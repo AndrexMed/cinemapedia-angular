@@ -5,12 +5,14 @@ import {
   HostListener,
   inject,
 } from '@angular/core';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MoviesService } from './movies.service';
+import { RouterLink } from '@angular/router';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 
 @Component({
   selector: 'app-movies',
-  imports: [CommonModule, JsonPipe],
+  imports: [CommonModule, RouterLink, MovieCardComponent],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.css',
 })
