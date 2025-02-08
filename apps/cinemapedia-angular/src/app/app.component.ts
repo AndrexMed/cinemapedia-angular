@@ -10,11 +10,17 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   showButton = false;
 
-  // constructor() {
-  //   window.addEventListener('scroll', () => {
-  //     this.showButton = window.scrollY > 100;
-  //   });
-  // }
+  constructor() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          this.showButton = true;
+        } else {
+          this.showButton = false;
+        }
+      });
+    }
+  }
 
   goToTop() {
     window.scrollTo({
