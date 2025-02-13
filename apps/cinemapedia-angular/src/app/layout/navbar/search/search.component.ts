@@ -5,7 +5,7 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MoviesService } from '../../../features/movies/movies.service';
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -13,7 +13,7 @@ import { Movie } from '../../../features/movies/models/movies.interface';
 
 @Component({
   selector: 'app-search',
-  imports: [CommonModule],
+  imports: [DatePipe],
   templateUrl: './search.component.html',
 })
 export class SearchComponent {
@@ -38,7 +38,7 @@ export class SearchComponent {
     this.searchQuery.set((event.target as HTMLInputElement).value);
   }
 
-  goToDetails(movieId: number): void {
+  goToDetails(movieId: string): void {
     this._router.navigate(['/movies', movieId]);
   }
 
@@ -46,5 +46,11 @@ export class SearchComponent {
     this.searchQuery.set('');
     this._moviesSvc.setRandomMovie();
     this._router.navigate(['movies']);
+  }
+
+  getImageUrl(posterPath: string): string {
+    return posterPath
+      ? `https://image.tmdb.org/t/p/w500${posterPath}`
+      : 'https://placehold.co/400';
   }
 }

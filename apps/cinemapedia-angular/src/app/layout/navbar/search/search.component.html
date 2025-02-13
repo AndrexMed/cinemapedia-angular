@@ -1,1 +1,26 @@
-<p>search works!</p>
+<div class="relative search-container">
+  <input
+    type="text"
+    class="py-2 pl-4 text-white border border-gray-700 rounded w-80 bg-transparent focus:outline-none focus:ring-2 focus:ring-netflix-red focus:border-transparent"
+    placeholder="Search"
+    (input)="onSearchInput($event)"
+  />
+  <ul
+    class="absolute z-50 w-full mt-2 rounded-md shadow-lg bg-netflix-black search-results"
+  >
+    @for (movie of movies().slice(0, 10); track movie.id) {
+    <li
+      tabindex="0"
+      class="flex items-center p-2 rounded-md hover:bg-netflix-red-dark cursor-pointer"
+      (click)="goToDetails(movie.id)"
+    >
+      <img
+        [src]="getImageUrl(movie.poster_path)"
+        alt="{{ movie.title }}"
+        class="w-14 h-14 mr-2"
+      />
+      <span>{{ movie.title }} - {{ movie.release_date | date : 'yyyy' }}</span>
+    </li>
+    }
+  </ul>
+</div>
