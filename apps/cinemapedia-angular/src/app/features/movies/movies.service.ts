@@ -34,8 +34,8 @@ export class MoviesService {
     this._getTrending();
   }
 
-  getMovieById(id: string): Observable<MovieResponse> {
-    return this._http.get<MovieResponse>(`${this.apiUrl}/movie/${id}`, {
+  getMovieById(id: string): Observable<Movie> {
+    return this._http.get<Movie>(`${this.apiUrl}/movie/${id}`, {
       params: {
         ...this.queryParams,
       },
