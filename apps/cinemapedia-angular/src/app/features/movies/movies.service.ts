@@ -18,7 +18,7 @@ export class MoviesService {
 
   private readonly apiKey = environment.apiKey;
   private readonly apiUrl = environment.apiUrl;
-  private readonly language = 'es-MX';
+  private readonly language = environment.language;
 
   private readonly queryParams = {
     api_key: this.apiKey,

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Movie } from '../models/movies.interface';
 
@@ -7,6 +7,7 @@ import { Movie } from '../models/movies.interface';
   imports: [CommonModule],
   templateUrl: './movie-card.component.html',
   styleUrl: './movie-card.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieCardComponent {
   movie = input.required<Movie>();
@@ -14,7 +15,9 @@ export class MovieCardComponent {
 
   getImageUrl(): string {
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
-    return this.imageError ? '/placeholder.png' : baseUrl + this.movie().poster_path;
+    return this.imageError
+      ? '/placeholder.png'
+      : baseUrl + this.movie().poster_path;
   }
 
   setImageError(value: boolean) {
