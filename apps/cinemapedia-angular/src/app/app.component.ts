@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeroComponent } from './layout/hero/hero.component';
 import { MoviesService } from './features/movies/movies.service';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   imports: [RouterOutlet, HeroComponent, NavbarComponent],
@@ -15,6 +16,10 @@ export class AppComponent {
   heroMovie = computed(() => this._moviesSvc.selectedMovie());
 
   showButton = false;
+
+  ngOnInit(): void {
+    initFlowbite();
+  }
 
   constructor() {
     if (typeof window !== 'undefined') {

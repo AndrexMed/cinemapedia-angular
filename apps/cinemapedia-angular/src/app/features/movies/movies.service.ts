@@ -1,5 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Movie, MovieResponse } from './models/movies.interface';
+import {
+  ActorResponse,
+  Movie,
+  MovieResponse,
+  VideoResponse,
+} from './models/movies.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'apps/cinemapedia-angular/src/environments/environment.development';
@@ -85,6 +90,28 @@ export class MoviesService {
         query: searchTerm,
       },
     });
+  }
+
+  getYoutubeVideoById(movieId: string): Observable<VideoResponse> {
+    return this._http.get<VideoResponse>(
+      `${this.apiUrl}/movie/${movieId}/videos`,
+      {
+        params: {
+          ...this.queryParams,
+        },
+      }
+    );
+  }
+
+  getActorsByMovieId(movieId: string): Observable<ActorResponse> {
+    return this._http.get<ActorResponse>(
+      `${this.apiUrl}/movie/${movieId}/credits`,
+      {
+        params: {
+          ...this.queryParams,
+        },
+      }
+    );
   }
 
   setRandomMovie(): void {
