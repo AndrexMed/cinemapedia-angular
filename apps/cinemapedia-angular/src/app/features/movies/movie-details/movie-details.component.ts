@@ -19,7 +19,6 @@ export class MovieDetailsComponent {
   private readonly _moviesSvc = inject(MoviesService);
 
   readonly _imgBaseUrl = environment.apiBaseImageUrl;
-  private readonly _flowBiteSvc = inject(FlowbiteService);
 
   movie = rxResource({
     request: () => this.movieId,
@@ -35,13 +34,6 @@ export class MovieDetailsComponent {
     request: () => this.movieId,
     loader: () => this._moviesSvc.getYoutubeVideoById(this.movieId()),
   });
-
-  ngOnInit(): void {
-    this._flowBiteSvc.loadFlowbite((flowbite) => {
-      // Your custom code here
-      console.log('Flowbite loaded', flowbite);
-    });
-  }
 
   goBack(): void {
     this._router.navigate(['movies']);
