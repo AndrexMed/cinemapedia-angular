@@ -1,1 +1,19 @@
-<p>movie-row works!</p>
+<div class="px-4 mt-4 md:px-16">
+  <h2 class="text-xl mb-4 font-semibold text-white md:text-2xl">
+    {{ title() }}
+  </h2>
+
+  <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+    @for (movie of movies().slice(0,4); track $index) {
+    <div
+      class="relative transition duration-300 ease-in transform cursor-pointer group sm:hover:scale-10"
+    >
+      <img
+        [src]="getImageUrl(movie.poster_path)"
+        alt=""
+        class="object-cover w-full rounded-md"
+      />
+    </div>
+    }
+  </div>
+</div>

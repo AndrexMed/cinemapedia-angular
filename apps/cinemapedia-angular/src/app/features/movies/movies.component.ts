@@ -9,10 +9,11 @@ import { CommonModule } from '@angular/common';
 import { MoviesService } from './movies.service';
 import { RouterLink } from '@angular/router';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { MovieRowComponent } from "./movie-row/movie-row.component";
 
 @Component({
   selector: 'app-movies',
-  imports: [CommonModule, RouterLink, MovieCardComponent],
+  imports: [CommonModule, RouterLink, MovieCardComponent, MovieRowComponent],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.css',
 })

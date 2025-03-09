@@ -9,13 +9,14 @@ import { environment } from 'apps/cinemapedia-angular/src/environments/environme
   templateUrl: './movie-row.component.html',
 })
 export class MovieRowComponent {
+  title = input<string>('Trending');
   movies = input.required<Movie[]>();
 
   private readonly apiImageUrl = environment.apiBaseImageUrl;
 
   getImageUrl(posterPath: string): string {
     return posterPath
-      ? `${this.apiImageUrl}/w500${posterPath}`
+      ? `${this.apiImageUrl}${posterPath}`
       : 'https://placehold.co/400';
   }
 }
