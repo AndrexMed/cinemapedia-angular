@@ -6,13 +6,33 @@
   <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
     @for (movie of movies().slice(0,4); track $index) {
     <div
-      class="relative transition duration-300 ease-in transform cursor-pointer group sm:hover:scale-10"
+      class="relative transition duration-200 ease-in transform cursor-pointer group sm:hover:scale-105"
     >
       <img
         [src]="getImageUrl(movie.poster_path)"
-        alt=""
+        [alt]="movie.title"
         class="object-cover w-full rounded-md"
       />
+      <div
+        class="absolute inset-0 rounded-md flex items-center justify-center transition-all duration-200 bg-black bg-opacity-0 group-hover:opacity-100"
+      >
+        <div
+          class="p-4 text-center text-white opacity-0 group-hover:opacity-100"
+        >
+          <h3 class="text-lg font-semibold">
+            {{ movie.title }}
+          </h3>
+
+          <div class="flex space-x-2 justify-center mt-2">
+            <button class="p-2 rounded-md bg-white/20 hover:bg-white/40">
+              ▶️ Watch
+            </button>
+            <button class="p-2 rounded-md bg-white/20 hover:bg-white/40">
+              ℹ️ Info
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     }
   </div>
