@@ -1,6 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
 import {
-  ActorResponse,
   Movie,
   MovieResponse,
   VideoResponse,
@@ -95,17 +94,6 @@ export class MoviesService {
   getYoutubeVideoById(movieId: string): Observable<VideoResponse> {
     return this._http.get<VideoResponse>(
       `${this.apiUrl}/movie/${movieId}/videos`,
-      {
-        params: {
-          ...this.queryParams,
-        },
-      }
-    );
-  }
-
-  getActorsByMovieId(movieId: string): Observable<ActorResponse> {
-    return this._http.get<ActorResponse>(
-      `${this.apiUrl}/movie/${movieId}/credits`,
       {
         params: {
           ...this.queryParams,

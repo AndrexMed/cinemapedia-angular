@@ -34,6 +34,9 @@
 
     <div class="">
       <!-- <app-tabs /> -->
+      @if (actors.hasValue()) { @let actorsData = actors.value();
+      <app-actors [actors]="actorsData" />
+      }
     </div>
     }
   </div>

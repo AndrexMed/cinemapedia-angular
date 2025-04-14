@@ -6,10 +6,12 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { environment } from 'apps/cinemapedia-angular/src/environments/environment.development';
 import { TabsComponent } from './tabs/tabs.component';
 import { FlowbiteService } from '../../../shared/services/flowbite.service';
+import { ActorsService } from '../../actors/actors.service';
+import { ActorsComponent } from '../../actors/actors.component';
 
 @Component({
   selector: 'app-movie-details',
-  imports: [DatePipe, DecimalPipe, TabsComponent],
+  imports: [DatePipe, DecimalPipe, TabsComponent, ActorsComponent],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css',
 })
@@ -17,6 +19,7 @@ export class MovieDetailsComponent {
   movieId = input.required<string>();
   private readonly _router = inject(Router);
   private readonly _moviesSvc = inject(MoviesService);
+  private readonly _actorsSvc = inject(ActorsService);
 
   readonly _imgBaseUrl = environment.apiBaseImageUrl;
 
@@ -27,7 +30,7 @@ export class MovieDetailsComponent {
 
   actors = rxResource({
     request: () => this.movieId,
-    loader: () => this._moviesSvc.getActorsByMovieId(this.movieId()),
+    loader: () => this._actorsSvc.getActorsByMovieId(this.movieId()),
   });
 
   youtubeVideos = rxResource({
